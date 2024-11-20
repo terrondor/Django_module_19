@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Страница{% endblock %}</title>
+</head>
+<body>
+<header>
+    <h1>{% block pagename %}Заголовок{% endblock %}</h1>
+</header>
+<nav>
+    {% block menu %}
+    <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/shop/">Магазин</a></li>
+        <li><a href="/basket/">Корзина</a></li>
+        <li><a href="/django_sign_up/">Регистрация</a></li>
+
+    </ul>
+    {% endblock %}
+</nav>
+<main>
+    <div>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</main>
+</body>
+</html>
