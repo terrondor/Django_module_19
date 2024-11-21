@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'task1/styles.css' %}">
+    <title>Список статей</title>
+</head>
+<body>
+    <h1>Список статей</h1>
+
+
+    <form method="GET" action="">
+    <label for="num_posts">Количество статей на странице:</label>
+        <select name="num_posts" id="num_posts" onchange="this.form.submit();">
+            <option value="3" {% if num_posts == '3' %}selected{% endif %}>3</option>
+            <option value="5" {% if num_posts == '5' %}selected{% endif %}>5</option>
+            <option value="10" {% if num_posts == '10' %}selected{% endif %}>10</option>
+        </select>
+    </form>
+
+    <ul>
+        {% for post in page_obj %}
+            <li>{{ post.title }} - {{ post.published_date }}</li>
+        {% empty %}
+            <li>Нет доступных статей.</li>
+        {% endfor %}
+    </ul>
+
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1&num_posts={{ num_posts }}">Первый</a>
+            <a href="?page={{ page_obj.previous_page_number }}&num_posts={{ num_posts }}">Предыдущий</a>
+        {% endif %}
+
+        <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&num_posts={{ num_posts }}">Следующий</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&num_posts={{ num_posts }}">Последний</a>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+from django.shortcuts import render
 from .forms import UserRegister
 from .models import Game
+from .models import Post
 
 
 # Create your views here.
@@ -61,4 +63,16 @@ def process_registration(request):
 
     info['form'] = form
     return render(request, 'registration_page.html', info)
+
+
 # Create your views here.
+
+def post_list(request):
+    posts = Post.objects.all()
+    num_posts_per_page = request.GET.get('num_posts', 5)
+
+    paginator = Paginator(posts, num_posts_per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'post_list.html', {'page_obj': page_obj, 'num_posts': num_posts_per_page})
