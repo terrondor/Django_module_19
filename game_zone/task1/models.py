@@ -22,3 +22,25 @@ class Game(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название категории")
+
+    def __str__(self):
+        return self.name
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    author = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name="posts", verbose_name="Автор")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="posts", verbose_name="Категория")
+
+
+
+    def __str__(self):
+        return self.title
