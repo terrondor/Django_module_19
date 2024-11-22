@@ -76,11 +76,15 @@ WSGI_APPLICATION = 'game_zone.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': 'Game_db',
+           'USER': 'postgres',
+           'PASSWORD': '999555999',
+           'HOST': 'localhost',
+           'PORT': '5432',
+       }
+   }
 
 
 # Password validation
